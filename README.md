@@ -38,7 +38,7 @@ var u = new User("John", "Doe");
 console.log(u.getFirstname());  // Affiche "John"
 `````
 
-Mise en place de l'héritage
+Mise en place de l'héritage:
 `````javascript
 
 var Bob = piou.class({
@@ -98,7 +98,7 @@ this.parent(".klaxon"); // Remonte de deux parents, etc...
 
 L'appel aux méthodes parentes prend en compte un second argument afin de passer des valeurs:
 `````javascript
-this.parent("addition", [1, 2, 3]); // Appele une méthode "addition" sur la classe parente lui passe 3 arguments numériques
+this.parent("addition", [1, 2, 3]); // Appelle une méthode "addition" sur la classe parente et lui passe 3 arguments numériques
 `````
 
 Ecrire des méthodes statiques:
