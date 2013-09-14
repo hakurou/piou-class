@@ -82,11 +82,11 @@ var Camion = piou.class({
   klaxon: function()
   {
     console.log("pouet pouet");
-    this.parent("klaxon");
+    this.__parent("klaxon");
   }
 });
 
-var v = new Focus();
+var v = new Camion();
 v.klaxon(); // Affiche "pouet pouet kring kring"
 `````
 

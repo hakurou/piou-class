@@ -24,7 +24,7 @@
 		if(prps.hasOwnProperty("extend$"))
 			parent = prps.extend$;
 		
-		// Choice a constructor for our class
+		// Choose a constructor for our class
 		if(prps.hasOwnProperty("__construct"))
 			currentClass = prps.__construct;
 		else

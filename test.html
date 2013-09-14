@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Tests</title>
+		<meta charset="utf-8">
+	</head>
+	<body>
+		<script type="text/javascript" src="piou-class.js"></script>
+		
+		<script type="text/javascript">
+			(function(){
+				"use strict";
+
+				// Test 1
+				var User = piou.class({
+					firstname : "",
+					lastname : "",
+
+					// Le constructeur, qui n'est pas obligatoire
+					__construct : function(firstname, lastname) {
+						this.firstname = firstname;
+						this.lastname = lastname;
+					},
+					getFirstname : function() {
+						return this.firstname;
+					},
+					getLastname : function() {
+						return this.lastname;
+					}
+				});
+
+				var u = new User("John", "Doe");
+				console.log(u.getFirstname()); // Affiche "John"
+						
+	
+				// Test 2
+				var Bob = piou.class({
+					extend$ : User
+				});
+	
+				var u = new User("Bob", "Dylan");
+				console.log(u.getFirstname()); // Affiche "Bob"
+
+
+				// Test 3
+				var Vehicle = piou.class({
+
+					// [...] diverses propriétés
+
+					klaxon : function() {
+						console.log("kring kring");
+					}
+				});
+
+				var Focus = piou.class({
+					extend$ : Vehicle,
+
+					klaxon : function() {
+						console.log("pouet pouet");
+					}
+				});
+
+				var v = new Focus();
+				v.klaxon(); // Affiche "pouet pouet"
+				
+				
+				// Test 4
+				var Camion = piou.class({
+					extend$ : Vehicle,
+
+					klaxon : function() {
+						console.log("pouet pouet");
+						this.__parent("klaxon");
+					}
+				});
+
+				var v = new Camion();
+				v.klaxon(); // Affiche "pouet pouet kring kring"
+				
+				// Test 5
+				var SuperCamion = piou.class({
+					extend$ : Camion,
+
+					klaxon : function() {
+						console.log("poom poom");
+						this.__parent(".klaxon");
+					}
+				});
+				
+				var v = new SuperCamion();
+				v.klaxon(); // Affiche "poom poom kring kring"
+				
+				// Test 6
+				var Hello = piou.class({
+					hello: function(name)
+					{
+						console.log("Hello " + name + " !");
+					}
+				});
+				
+				var MyHello = piou.class({
+					extend$: Hello,
+					
+					hello: function(name, appelParent)
+					{
+						if(!appelParent)
+							console.log("Coucou " + name + " !");
+						else
+							this.__parent("hello", [name]);
+					}
+				});
+				
+				var m = new MyHello();
+				m.hello("Bob", false); // Affiche "coucou Bob !"
+				m.hello("Bob", true); // Affiche "Hello Bob !"
+				
+				// Test 7
+				var MaClasse = piou.class({
+					// diverses méthodes
+
+					static : {
+						methode1 : function() {
+							console.log("method 1");
+						},
+						methode2 : function() {
+							console.log("method 2");
+						}
+					}
+				});
+
+				MaClasse.methode1(); // Appel d'une méthode statique
+			})();
+		</script>
+		
+	</body>
+</html>
