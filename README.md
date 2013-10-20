@@ -12,7 +12,7 @@ Utilisation
 
 Création d'une simple classe: 
 `````javascript
-var User = piou.class({
+var User = piou.defClass({
   firstname: "",
   lastname: "",
   
@@ -41,7 +41,7 @@ console.log(u.getFirstname());  // Affiche "John"
 Mise en place de l'héritage:
 `````javascript
 
-var Bob = piou.class({
+var Bob = piou.defClass({
   extend$: User
 });
 
@@ -51,7 +51,7 @@ console.log(u.getFirstname());  // Affiche "Bob"
 
 Ecrire une surcharge de méthode:
 `````javascript
-var Vehicle = piou.class({
+var Vehicle = piou.defClass({
   
   // [...] diverses propriétés
   
@@ -61,7 +61,7 @@ var Vehicle = piou.class({
   }
 });
 
-var Focus = piou.class({
+var Focus = piou.defClass({
   extend$: Vehicle,
   
   klaxon: function()
@@ -76,7 +76,7 @@ v.klaxon(); // Affiche "pouet pouet"
 
 Appel à une méthode parente:
 `````javascript
-var Camion = piou.class({
+var Camion = piou.defClass({
   extend$: Vehicle,
   
   klaxon: function()
@@ -103,7 +103,7 @@ this.parent("addition", [1, 2, 3]); // Appelle une méthode "addition" sur la cl
 
 Ecrire des méthodes statiques:
 `````javascript
-var MaClasse = piou.class({
+var MaClasse = piou.defClass({
   // diverses méthodes
   
   static: {
