@@ -112,9 +112,14 @@
 						cur = cur.extend$.prototype;
 					else
 						return null;
-						
+					
 			if(cur.hasOwnProperty(methodName))
+			{
+				if(args == null)
+					args = [];
+					
 				return cur[methodName].apply(this, args);
+			}
 		}
 		
 		return null;
@@ -122,5 +127,5 @@
 		
 	// Global access
 	klass.version = "1.0.4";
-	window.piou.class = klass;
+	window.piou.defClass = klass;
 })();

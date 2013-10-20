@@ -11,8 +11,11 @@
 			(function(){
 				"use strict";
 
+				if(window.console == null)
+					var console = {log: function(v){alert(v);}};
+
 				// Test 1
-				var User = piou.class({
+				var User = piou.defClass({
 					firstname : "",
 					lastname : "",
 
@@ -34,7 +37,7 @@
 						
 	
 				// Test 2
-				var Bob = piou.class({
+				var Bob = piou.defClass({
 					extend$ : User
 				});
 	
@@ -43,7 +46,7 @@
 
 
 				// Test 3
-				var Vehicle = piou.class({
+				var Vehicle = piou.defClass({
 
 					// [...] diverses propriétés
 
@@ -52,7 +55,7 @@
 					}
 				});
 
-				var Focus = piou.class({
+				var Focus = piou.defClass({
 					extend$ : Vehicle,
 
 					klaxon : function() {
@@ -65,7 +68,7 @@
 				
 				
 				// Test 4
-				var Camion = piou.class({
+				var Camion = piou.defClass({
 					extend$ : Vehicle,
 
 					klaxon : function() {
@@ -78,7 +81,7 @@
 				v.klaxon(); // Affiche "pouet pouet kring kring"
 				
 				// Test 5
-				var SuperCamion = piou.class({
+				var SuperCamion = piou.defClass({
 					extend$ : Camion,
 
 					klaxon : function() {
@@ -91,14 +94,14 @@
 				v.klaxon(); // Affiche "poom poom kring kring"
 				
 				// Test 6
-				var Hello = piou.class({
+				var Hello = piou.defClass({
 					hello: function(name)
 					{
 						console.log("Hello " + name + " !");
 					}
 				});
 				
-				var MyHello = piou.class({
+				var MyHello = piou.defClass({
 					extend$: Hello,
 					
 					hello: function(name, appelParent)
@@ -115,7 +118,7 @@
 				m.hello("Bob", true); // Affiche "Hello Bob !"
 				
 				// Test 7
-				var MaClasse = piou.class({
+				var MaClasse = piou.defClass({
 					// diverses méthodes
 
 					static : {
