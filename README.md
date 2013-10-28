@@ -116,3 +116,9 @@ var MaClasse = piou.defClass({
 MaClasse.methode1();  // Appel d'une méthode statique
 `````
 
+Changelog
+-----------
+
+- 2013-10-28 - v1.0.5
+Lorsque l'on mettait des attributs complexes dans une classe (objet, tableau, etc...), une référence était créée et partagée entre 
+toutes les instances d'une même classe.
