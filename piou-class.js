@@ -1,7 +1,7 @@
 /**
  * Allows to create class ease
  * @author hakurou
- * @version 1.0.4
+ * @version 1.0.5
  */
 (function(){
 	"use strict";
@@ -25,23 +25,15 @@
 			parent = prps.extend$;
 		
 		// Choose a constructor for our class
-		if(prps.hasOwnProperty("__construct"))
-			currentClass = prps.__construct;
-		else
-		{
-			if(parent == null)
-				currentClass = function(){};
-			else
-				currentClass = function(){ return parent.apply(this, arguments); };
-		}
+		currentClass = klass.getConstruct(prps, parent);
 
 		// Copying of parent static methods
 		if(parent != null)
-			klass.cloneProperties(currentClass, parent);
+			currentClass = klass.cloneProperties(currentClass, parent);
 			
 		if(prps.hasOwnProperty("static"))
 		{
-			klass.cloneProperties(currentClass, prps["static"]);
+			currentClass = klass.cloneProperties(currentClass, prps["static"]);
 			delete prps["static"];
 		}
 		
@@ -50,15 +42,46 @@
 		Cl.prototype.__parent = __parent;
 		
 		if(parent != null)
-			klass.cloneProperties(Cl.prototype, parent.prototype);
+			Cl.prototype = klass.cloneProperties(Cl.prototype, parent.prototype);
 	
 		currentClass.prototype = new Cl();
 		
 		// Set new properties in the new class 
-		klass.cloneProperties(currentClass.prototype, prps);
+		currentClass.prototype = klass.cloneProperties(currentClass.prototype, prps);
 		
 		return currentClass;
 	}	
+	
+	/**
+	 * Choose a constructor for our class
+	 * @param prps
+	 * @param parent
+	 * @return Function
+	 */
+	klass.getConstruct = function(prps, parent)
+	{
+		var currentClass = null;
+		if(prps.hasOwnProperty("__construct"))
+			currentClass = prps.__construct;
+		else
+		{
+			if(parent != null)
+				currentClass = function(){ return parent.apply(this, arguments); };
+			else
+				currentClass = function(){};
+		}
+		
+		var ctr = function(){
+			// Clone properties otherwise they are references to the main model
+			for(var i in this)
+				if(typeof this[i] != "function")
+					this[i] = klass.clone(this[i]);
+
+			currentClass.apply(this, arguments);
+		}
+		
+		return ctr;
+	};
 	
 	/**
 	 * Clone all properties from source to target
@@ -69,6 +92,8 @@
 	{
 		for(var i in source)
 			target[i] = klass.clone(source[i]);
+			
+		return target;
 	};
 	
 	/**
