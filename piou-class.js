@@ -1,7 +1,7 @@
 /**
  * Allows to create class ease
  * @author hakurou
- * @version 1.0.5
+ * @version 1.0.6
  */
 (function(){
 	"use strict";
