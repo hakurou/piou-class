@@ -122,6 +122,9 @@
 	 */
 	function __parent(method, args)
 	{
+		if(typeof this.extend$ == "undefined")
+			return null;
+			
 		var parts = method.match(/^(\.*)(.*)$/);
 		var cur = this.extend$.prototype;
 		
