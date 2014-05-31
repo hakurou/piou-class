@@ -1,7 +1,7 @@
 /**
  * Allows to create class ease
  * @author hakurou
- * @version 1.0.6
+ * @version 1.0.7
  */
 (function(){
 	"use strict";
@@ -128,7 +128,8 @@
 		var parts = method.match(/^(\.*)(.*)$/);
 		var cur = this.extend$.prototype;
 		
-		if(parts.length > 0)
+		if(parts != null &&
+			parts.length > 0)
 		{
 			var dot = parts[1];
 			var methodName = parts[2];

@@ -119,6 +119,10 @@ MaClasse.methode1();  // Appel d'une méthode statique
 Changelog
 -----------
 
+- 2014-05-31 - v1.0.7
+
+Ajout d'un test supplémentaire au retour de résultat de regexp dans la méthode "parent"
+
 - 2013-11-11 - v1.0.6
 
 Erreur qui s'affiche en console lorsque la classe n'a pas d'extend$.
